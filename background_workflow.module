@@ -1,0 +1,39 @@
+<?php
+
+include_once('background_workflow.features.inc');
+
+
+function background_workflow_init() {
+  if(arg(0) == 'node' && arg(1)) {
+    $node = node_load(arg(1));
+    if($node->type == "background") {
+      background_workflow_apply($node);
+    }
+    
+  }
+  elseif(arg(0) != 'admin') {
+    background_workflow_apply();
+  }
+}
+
+function background_workflow_apply($node = NULL) {
+  if(!$node) {
+    $node = background_workflow_random();
+  }
+  dynamic_backgrounds_apply('/' . $node->field_background[0]['filepath']);
+}
+
+function background_workflow_random() {
+
+  $sql = "SELECT node.nid AS nid,
+    RAND() AS _random
+    FROM node node 
+    LEFT JOIN workflow_node workflow_node ON node.nid = workflow_node.nid
+    WHERE workflow_node.state_name = 'background_approvals_approved' 
+    ORDER BY _random ASC 
+    LIMIT 1";
+  return node_load(db_result(db_query($sql)));
+  
+}
+
+
