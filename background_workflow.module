@@ -4,7 +4,7 @@ include_once('background_workflow.features.inc');
 
 
 function background_workflow_init() {
-  if(arg(0) == 'node' && arg(1)) {
+  if(arg(0) == 'node' && is_numeric(arg(1))) {
     $node = node_load(arg(1));
     if($node->type == "background") {
       background_workflow_apply($node);
@@ -40,4 +40,15 @@ function background_workflow_random() {
   
 }
 
+function background_workflow_form_alter(&$form, &$form_state, $form_id) {
+  if($form_id == "background_node_form") {
+  //kpr($form);
+  unset($form['buttons']);
+  }
+}
 
+function background_workflow_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($node->type == "background" && $op == "insert") {
+    drupal_set_message("Does your background look like awesome sauce?  Click the Move to \"Review for Approval\" button.", "error");       
+  }
+}
