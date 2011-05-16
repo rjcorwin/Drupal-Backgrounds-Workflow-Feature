@@ -83,7 +83,7 @@ function background_workflow_views_default_views() {
   $handler->override_option('title', 'Backgrounds For Review');
   $handler->override_option('empty', 'All backgrounds marked for Review have been reviewed.');
   $handler->override_option('empty_format', '1');
-  $handler->override_option('path', 'backgrounds/review');
+  $handler->override_option('path', '_backgrounds/review');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => 'Approve Backgrounds for Review',
@@ -121,7 +121,7 @@ function background_workflow_views_default_views() {
     ),
   ));
   $handler->override_option('title', 'Backgrounds');
-  $handler->override_option('path', 'backgrounds');
+  $handler->override_option('path', '_backgrounds');
   $handler->override_option('menu', array(
     'type' => 'none',
     'title' => 'Backgrounds',
