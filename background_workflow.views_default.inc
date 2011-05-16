@@ -17,6 +17,13 @@ function background_workflow_views_default_views() {
   $view->api_version = 2;
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
   $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->override_option('sorts', array(
+    'random' => array(
+      'id' => 'random',
+      'table' => 'views',
+      'field' => 'random',
+    ),
+  ));
   $handler->override_option('filters', array(
     'type' => array(
       'operator' => 'in',
@@ -78,7 +85,7 @@ function background_workflow_views_default_views() {
   $handler->override_option('empty_format', '1');
   $handler->override_option('path', 'backgrounds/review');
   $handler->override_option('menu', array(
-    'type' => 'tab',
+    'type' => 'none',
     'title' => 'Approve Backgrounds for Review',
     'description' => '',
     'weight' => '0',
@@ -93,29 +100,10 @@ function background_workflow_views_default_views() {
   ));
   $handler = $view->new_display('page', 'Backgrounds Approved', 'page_2');
   $handler->override_option('filters', array(
-    'type' => array(
-      'operator' => 'in',
-      'value' => array(
-        'background' => 'background',
-      ),
-      'group' => '0',
-      'exposed' => FALSE,
-      'expose' => array(
-        'operator' => FALSE,
-        'label' => '',
-      ),
-      'id' => 'type',
-      'table' => 'node',
-      'field' => 'type',
-      'override' => array(
-        'button' => 'Override',
-      ),
-      'relationship' => 'none',
-    ),
     'state_name' => array(
       'operator' => 'in',
       'value' => array(
-        'background_approvals_approved' => 'background_approvals_approved',
+        'background_approvals_review' => 'background_approvals_review',
       ),
       'group' => '0',
       'exposed' => FALSE,
@@ -135,7 +123,7 @@ function background_workflow_views_default_views() {
   $handler->override_option('title', 'Backgrounds');
   $handler->override_option('path', 'backgrounds');
   $handler->override_option('menu', array(
-    'type' => 'normal',
+    'type' => 'none',
     'title' => 'Backgrounds',
     'description' => '',
     'weight' => '0',
