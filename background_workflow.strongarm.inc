@@ -75,14 +75,15 @@ function background_workflow_strongarm() {
   $strongarm->name = 'content_extra_weights_background';
   $strongarm->value = array(
     'title' => '-5',
-    'body_field' => '-2',
-    'revision_information' => '0',
-    'author' => '-1',
-    'options' => '1',
-    'comment_settings' => '3',
-    'menu' => '-3',
-    'path' => '4',
-    'path_redirect' => '2',
+    'body_field' => '2',
+    'revision_information' => '4',
+    'author' => '3',
+    'options' => '5',
+    'comment_settings' => '7',
+    'menu' => '1',
+    'path' => '8',
+    'workflow' => '9',
+    'path_redirect' => '6',
   );
   $export['content_extra_weights_background'] = $strongarm;
 
